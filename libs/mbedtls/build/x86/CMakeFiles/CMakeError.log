@@ -1,0 +1,81 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c256e/fast && /usr/bin/make  -f CMakeFiles/cmTC_c256e.dir/build.make CMakeFiles/cmTC_c256e.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c256e.dir/src.c.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=i686-none-linux-android16 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla -Wformat=2 -Wno-format-nonliteral -Werror -DCMAKE_HAVE_LIBC_PTHREAD -fPIE -o CMakeFiles/cmTC_c256e.dir/src.c.o -c /home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp/src.c
+/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp/src.c:13:3: error: implicit declaration of function 'pthread_cancel' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+  pthread_cancel(thread);
+  ^
+/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp/src.c:13:3: note: did you mean 'pthread_once'?
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/pthread.h:275:5: note: 'pthread_once' declared here
+int pthread_once(pthread_once_t* __once, void (*__init_routine)(void));
+    ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_c256e.dir/build.make:85: CMakeFiles/cmTC_c256e.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_c256e/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_04a53/fast && /usr/bin/make  -f CMakeFiles/cmTC_04a53.dir/build.make CMakeFiles/cmTC_04a53.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_04a53.dir/CheckFunctionExists.c.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=i686-none-linux-android16 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla -Wformat=2 -Wno-format-nonliteral -Werror -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE -o CMakeFiles/cmTC_04a53.dir/CheckFunctionExists.c.o -c /home/son/Android/Sdk/cmake/3.18.1/share/cmake-3.18/Modules/CheckFunctionExists.c
+/home/son/Android/Sdk/cmake/3.18.1/share/cmake-3.18/Modules/CheckFunctionExists.c:7:3: error: declaration of built-in function 'pthread_create' requires inclusion of the header <pthread.h> [-Werror,-Wbuiltin-requires-header]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:3:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS pthread_create
+                              ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_04a53.dir/build.make:85: CMakeFiles/cmTC_04a53.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_04a53/fast] Error 2
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_78845/fast && /usr/bin/make  -f CMakeFiles/cmTC_78845.dir/build.make CMakeFiles/cmTC_78845.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_78845.dir/CheckFunctionExists.c.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=i686-none-linux-android16 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -Wall -Wextra -Wwrite-strings -Wpointer-arith -Wimplicit-fallthrough -Wshadow -Wvla -Wformat=2 -Wno-format-nonliteral -Werror -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE -o CMakeFiles/cmTC_78845.dir/CheckFunctionExists.c.o -c /home/son/Android/Sdk/cmake/3.18.1/share/cmake-3.18/Modules/CheckFunctionExists.c
+/home/son/Android/Sdk/cmake/3.18.1/share/cmake-3.18/Modules/CheckFunctionExists.c:7:3: error: declaration of built-in function 'pthread_create' requires inclusion of the header <pthread.h> [-Werror,-Wbuiltin-requires-header]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:3:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS pthread_create
+                              ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_78845.dir/build.make:85: CMakeFiles/cmTC_78845.dir/CheckFunctionExists.c.o] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/mbedtls/build/x86/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_78845/fast] Error 2
+
+
+

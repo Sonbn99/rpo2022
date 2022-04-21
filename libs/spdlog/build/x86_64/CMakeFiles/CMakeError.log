@@ -1,0 +1,73 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3573b/fast && /usr/bin/make  -f CMakeFiles/cmTC_3573b.dir/build.make CMakeFiles/cmTC_3573b.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3573b.dir/src.cxx.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DCMAKE_HAVE_LIBC_PTHREAD -fPIE -std=c++11 -o CMakeFiles/cmTC_3573b.dir/src.cxx.o -c /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp/src.cxx
+/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp/src.cxx:13:3: error: use of undeclared identifier 'pthread_cancel'
+  pthread_cancel(thread);
+  ^
+1 error generated.
+make[1]: *** [CMakeFiles/cmTC_3573b.dir/build.make:85: CMakeFiles/cmTC_3573b.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_3573b/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_52c74/fast && /usr/bin/make  -f CMakeFiles/cmTC_52c74.dir/build.make CMakeFiles/cmTC_52c74.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_52c74.dir/CheckFunctionExists.cxx.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE -std=c++11 -o CMakeFiles/cmTC_52c74.dir/CheckFunctionExists.cxx.o -c /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_52c74
+/home/son/Android/Sdk/cmake/3.18.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_52c74.dir/link.txt --verbose=1
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections   CMakeFiles/cmTC_52c74.dir/CheckFunctionExists.cxx.o -o cmTC_52c74  -lpthreads -latomic -lm 
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld: error: cannot find -lpthreads
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [CMakeFiles/cmTC_52c74.dir/build.make:106: cmTC_52c74] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_52c74/fast] Error 2
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ac88e/fast && /usr/bin/make  -f CMakeFiles/cmTC_ac88e.dir/build.make CMakeFiles/cmTC_ac88e.dir/build
+make[1]: Entering directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ac88e.dir/CheckFunctionExists.cxx.o
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot   -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE -std=c++11 -o CMakeFiles/cmTC_ac88e.dir/CheckFunctionExists.cxx.o -c /home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_ac88e
+/home/son/Android/Sdk/cmake/3.18.1/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac88e.dir/link.txt --verbose=1
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments -Wl,--gc-sections   CMakeFiles/cmTC_ac88e.dir/CheckFunctionExists.cxx.o -o cmTC_ac88e  -lpthread -latomic -lm 
+/home/son/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/linux-x86_64/lib/gcc/x86_64-linux-android/4.9.x/../../../../x86_64-linux-android/bin/ld: error: cannot find -lpthread
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+make[1]: *** [CMakeFiles/cmTC_ac88e.dir/build.make:106: cmTC_ac88e] Error 1
+make[1]: Leaving directory '/home/son/AndroidStudioProjects/rpo2022/libs/spdlog/build/x86_64/CMakeFiles/CMakeTmp'
+make: *** [Makefile:140: cmTC_ac88e/fast] Error 2
+
+
+
