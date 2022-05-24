@@ -42,7 +42,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-    namespace 'ru.iu3.fclient'
 }
 
 dependencies {
