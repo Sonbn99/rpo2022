@@ -30,6 +30,15 @@ public class ArtistController {
         Artist newArtist = artistRepository.save(artist);
         return new ResponseEntity<Object>(newArtist, HttpStatus.OK);
     }
+    @GetMapping("artists")
+    public ResponseEntity<List<Artist>> getArtistsCountry(@PathVariable(value="id") Long countryId){
+        Optional<Country> currentCountry = countryRepository.findById(countryId);
+        if(currentCountry.isPresent()){
+            return ResponseEntity.ok(currentCountry.get().artists);
+        }
+        return ResponseEntity.ok(new ArrayList<Artist>());
+    }
+
 
 }
 
