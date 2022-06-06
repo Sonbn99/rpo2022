@@ -1,8 +1,10 @@
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom"
+import BackendService from "../services/BackendService";
+import Utils from "../utils/Utils";
 class NavigationBarClass extends React.Component {
     constructor(props) {
         super(props);
@@ -11,7 +13,14 @@ class NavigationBarClass extends React.Component {
     goHome() {
         this.props.navigate("Home")
     }
+    logout() {
+        BackendService.logout().finally(() => {
+            Utils.removeUser();
+            console.log("logout success")
+        });
+    }
     render() {
+        let uname = Utils.getUserName();
         return (
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand><FontAwesomeIcon icon={faHome} />{' '}My RPO</Navbar.Brand>
@@ -19,10 +28,17 @@ class NavigationBarClass extends React.Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
-                        <Nav.Link onClick={this.goHome}>goHome</Nav.Link>
-                        <Nav.Link onClick={() => { this.props.navigate("\home") }}>Home again</Nav.Link>
+                        <Nav.Link onClick={this.goHome}>Another Home</Nav.Link>
+                        <Nav.Link onClick={() => { this.props.navigate("\home") }}>Yet Another Home</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
+                <Navbar.Text>{uname}</Navbar.Text>
+                {uname &&
+                    <Nav.Link onClick={this.logout}><FontAwesomeIcon icon={faUser} fixedWidth />{' '}Выход</Nav.Link>
+                }
+                {!uname &&
+                    <Nav.Link as={Link} to="/login"><FontAwesomeIcon icon={faUser} fixedWidth />{' '}Вход</Nav.Link>
+                }
             </Navbar>
         );
 
