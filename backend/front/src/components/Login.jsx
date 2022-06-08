@@ -47,6 +47,7 @@ export default connect()(function Login() {
             <form name="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">Логин</label>
+
                     <input type="text" className={'form-control' + (submitted && !username ? ' is-invalid' : '')}
                            name="username" value={username}
                            onChange={handleChangeLogin} />
